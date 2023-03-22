@@ -15,6 +15,25 @@ server.use(middlewares)
 // req.body
 server.use(jsonServer.bodyParser)
 
+server.use((req, res, next) => {
+  const json = res.json.bind(res)
+  res.success = (data) => {
+      return json({
+          code: 0,
+          msg: '请求成功',
+          data
+      })
+  }
+  res.fail = (msg, code = -1, data) => {
+      return json({
+          code,
+          msg,
+          data
+      })
+  }
+  next()
+})
+
 router(server)
 const jsonRouter  = jsonServer.router(db)
 
