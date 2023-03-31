@@ -5,8 +5,11 @@ module.exports = (req, res) => {
   const allData = getHomeSearchData()
 
   const list = allData.list.filter(v => v.label.includes(_label_like))
-
-  return res.success({
-    list
-  })
+  
+  setTimeout(() => {
+    return res.success({
+      list
+    })
+  }, 1000)
+  
 }
